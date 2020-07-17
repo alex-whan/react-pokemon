@@ -1,9 +1,33 @@
-import React, { PokeCard } from "react"
+import React, { useEffect, useState } from "react"
+import PokeCard from "./PokeCard"
+import Button from "./Button"
+
+const PAGE_COUNT = 10;
+const PAGE_LIMIT = 10;
+
 
 function MainContent() {
+    const [pokemon, setPokemon] = useState([])
+    useEffect(() => {
+        fetch('/pokemon?offset=10&limit=6')
+        .then((res) => {
+            console.log('res', res.body);
+            // setPokemon(res.body);
+        })
+    }, []);
+
+    const buttons = []
+
+    for (let i = 1; i <= PAGE_COUNT; i++) {
+      buttons.push(<Button key={i} type="secondary">{i}</Button>)
+    }
+  
+
     return (
-    <main class="wrapper">
-        <section>
+    <main className="wrapper">
+        {pokemon.map((poke) => poke.name)}
+        {buttons}
+        {/* <section>
             <div>
                 <form action="/search" method="GET">
                 <input type="text" name="search" placeholder="Search for Pokemon" required/>
@@ -24,9 +48,9 @@ function MainContent() {
         </section>
         <section class="pokedex" id="pokedex">
             <ul>
-                { <PokeCard /> } 
+                <PokeCard /> 
             </ul>
-        </section>
+        </section> */}
     </main>
     )
 }

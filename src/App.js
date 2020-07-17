@@ -3,9 +3,12 @@ import Footer from "./components/Footer"
 import Header from "./components/Header"
 import MainContent from "./components/MainContent"
 
+
+// do we need the actual PokeAPI url endpoint here?
 function App() {
     useEffect(() => {
-        fetch('/pokemon?offset=10&limit=10')
+        let url = 'https://pokeapi.co/api/v2/';
+        fetch(`${url}/pokemon?offset=10&limit=6`)
         .then((res) => {
             console.log(res);
         })

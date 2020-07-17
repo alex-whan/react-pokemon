@@ -23,9 +23,6 @@ function PokeCard() {
         <input type="hidden" name="image" value="Pokemon Sprite"></input>
         <input type="hidden" name="type1" value="Type 1"></input>
         <input type="hidden" name="type2" value="Type 2"></input>
-        <div>
-          <button>Add To Favorites</button>
-        </div>
       </form>
     </li>
   )

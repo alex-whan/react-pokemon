@@ -4,7 +4,7 @@ import React from "react"
 function Footer() {
     return (
         <footer>
-            <p>&copy; 2020 Alex Whan <a href="https://github.com/alex-whan/poke-collector"><i class="fab fa-github fa-2x"></i></a></p>
+            <p>&copy; 2020 Alex Whan <a href="https://github.com/alex-whan/poke-collector"><i className="fab fa-github fa-2x"></i></a></p>
         </footer>
     )
 }
