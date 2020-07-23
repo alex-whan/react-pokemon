@@ -3,6 +3,7 @@ const superagent = require('superagent');
 const bodyParser = require('body-parser')
 const path = require('path');
 const app = express();
+const PORT = process.env.PORT || 8080;
 app.use(express.static(path.join(__dirname, 'build')));
 
 app.get('/pokemon', getPokemon);
@@ -34,7 +35,6 @@ async function getPokemon(req, res) {
     promiseArray.push(superagent.get(url));
   }
 
-  console.log('POKEMON BEFORE:');
   const pokemonResponses = await Promise.all(promiseArray);
   const pokemon = pokemonResponses.map(({body}) => ({
     name: body.name ? body.name : 'Name not available.',
@@ -50,7 +50,6 @@ async function getPokemon(req, res) {
     // }
 
   }));
-  console.log('POKEMON AFTER:', pokemon);
   
   return res.send(pokemon);
  };
@@ -60,4 +59,8 @@ app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
-app.listen(process.env.PORT || 8080);
+// app.listen(process.env.PORT || 8080);
+
+app.listen(PORT, () => {
+  console.log(`Listening on ${PORT}`);
+})

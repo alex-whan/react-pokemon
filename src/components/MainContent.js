@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from "react"
 import PokeCard from "./PokeCard"
 import Button from "./Button"
+import axios from "axios"
 
 const PAGE_COUNT = 10;
 const PAGE_LIMIT = 10;
+const PAGE_OFFSET = 0;
 
 
 function MainContent() {
-    const [pokemon, setPokemon] = useState([])
+    // let url = '/pokemon?offset=10&limit=6';
+    const [loading, setLoading] = useState(true);
+    const [pokemon, setPokemon] = useState([]);
     useEffect(() => {
-        fetch('/pokemon?offset=10&limit=6')
+        axios.get('/pokemon?offset=10&limit=6')
         .then((res) => {
-            console.log('res', res.body);
+            console.log('RESPONSE BOD in MAIN CONTENT COMPONENT:', res.results);
             // setPokemon(res.body);
         })
     }, []);
@@ -25,8 +29,12 @@ function MainContent() {
 
     return (
     <main className="wrapper">
-        {pokemon.map((poke) => poke.name)}
         {buttons}
+        <ul>
+            {
+            loading ? <li>Loading...</li> : pokemon.map(poke => <li key={poke.id}>{poke.name}</li>)
+            }
+        </ul>
         {/* <section>
             <div>
                 <form action="/search" method="GET">
