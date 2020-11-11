@@ -1,41 +1,44 @@
-import React, { useEffect, useState } from "react"
-import PokeCard from "./PokeCard"
-import Button from "./Button"
-import axios from "axios"
+import React, { useEffect, useState } from 'react';
+import PokeCard from './PokeCard';
+import Button from './Button';
+import axios from 'axios';
 
 const PAGE_COUNT = 10;
 const PAGE_LIMIT = 10;
 const PAGE_OFFSET = 0;
 
-
 function MainContent() {
-    // let url = '/pokemon?offset=10&limit=6';
-    const [loading, setLoading] = useState(true);
-    const [pokemon, setPokemon] = useState([]);
-    useEffect(() => {
-        axios.get('/pokemon?offset=10&limit=6')
-        .then((res) => {
-            console.log('RESPONSE BOD in MAIN CONTENT COMPONENT:', res.results);
-            // setPokemon(res.body);
-        })
-    }, []);
+  // let url = '/pokemon?offset=10&limit=6';
+  const [loading, setLoading] = useState(true);
+  const [pokemon, setPokemon] = useState([]);
+  useEffect(() => {
+    axios.get('/pokemon?offset=10&limit=9').then(res => {
+      console.log('RESPONSE BOD in MAIN CONTENT COMPONENT:', res.results);
+      // setPokemon(res.body);
+    });
+  }, []);
 
-    const buttons = []
+  const buttons = [];
 
-    for (let i = 1; i <= PAGE_COUNT; i++) {
-      buttons.push(<Button key={i} type="secondary">{i}</Button>)
-    }
-  
+  for (let i = 1; i <= PAGE_COUNT; i++) {
+    buttons.push(
+      <Button key={i} type="secondary">
+        {i}
+      </Button>
+    );
+  }
 
-    return (
+  return (
     <main className="wrapper">
-        {buttons}
-        <ul>
-            {
-            loading ? <li>Loading...</li> : pokemon.map(poke => <li key={poke.id}>{poke.name}</li>)
-            }
-        </ul>
-        {/* <section>
+      {buttons}
+      <ul>
+        {loading ? (
+          <li>Loading...</li>
+        ) : (
+          pokemon.map(poke => <li key={poke.id}>{poke.name}</li>)
+        )}
+      </ul>
+      {/* <section>
             <div>
                 <form action="/search" method="GET">
                 <input type="text" name="search" placeholder="Search for Pokemon" required/>
@@ -60,7 +63,7 @@ function MainContent() {
             </ul>
         </section> */}
     </main>
-    )
+  );
 }
 
-export default MainContent
+export default MainContent;
