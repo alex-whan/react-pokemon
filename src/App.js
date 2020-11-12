@@ -56,6 +56,7 @@ function App() {
     <div>
       <Header />
       <ListLoading isLoading={appState.loading} pokemon={appState.pokemon} />
+      <MainContent />
       <Footer />
     </div>
   );
