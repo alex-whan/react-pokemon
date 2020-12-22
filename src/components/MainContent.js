@@ -12,10 +12,12 @@ function MainContent() {
   const [loading, setLoading] = useState(true);
   const [pokemon, setPokemon] = useState([]);
   useEffect(() => {
-    axios.get('/pokemon?offset=10&limit=9').then(res => {
-      console.log('RESPONSE BOD in MAIN CONTENT COMPONENT:', res.results);
-      // setPokemon(res.body);
-    });
+    axios
+      .get('https://pokeapi.co/api/v2/pokemon?offset=10&limit=9')
+      .then(res => {
+        console.log('RESPONSE BOD in MAIN CONTENT COMPONENT:', res.results);
+        // setPokemon(res.body);
+      });
   }, []);
 
   const buttons = [];

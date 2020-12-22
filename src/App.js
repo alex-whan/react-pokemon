@@ -30,6 +30,8 @@ function App() {
     pokemon: null,
   });
 
+  console.log({ nextPageUrl }, { prevPageUrl });
+
   // axios lets us request stuff from APIs on the front end (avoids the weird header/CORS errors?)
   useEffect(() => {
     setAppState({ loading: true }); // app state is an object itself
@@ -43,6 +45,7 @@ function App() {
       })
       .then(res => {
         // console.log('IN APP JS RESPONSE:', res.data);
+        console.log('RES???', res);
         const allPokemon = res.data.results;
         setCurrentPageURL(url);
         setPrevPageUrl(res.data.previous);
