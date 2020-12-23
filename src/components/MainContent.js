@@ -8,16 +8,14 @@ const PAGE_LIMIT = 10;
 const PAGE_OFFSET = 0;
 
 function MainContent() {
-  // let url = '/pokemon?offset=10&limit=6';
+  let url = 'https://pokeapi.co/api/v2/pokemon?offset=10&limit=9';
   const [loading, setLoading] = useState(true);
   const [pokemon, setPokemon] = useState([]);
   useEffect(() => {
-    axios
-      .get('https://pokeapi.co/api/v2/pokemon?offset=10&limit=9')
-      .then(res => {
-        console.log('RESPONSE BOD in MAIN CONTENT COMPONENT:', res.results);
-        // setPokemon(res.body);
-      });
+    axios.get(url).then(res => {
+      console.log('RESPONSE BOD in MAIN CONTENT COMPONENT:', res.results);
+      // setPokemon(res.body);
+    });
   }, []);
 
   const buttons = [];
